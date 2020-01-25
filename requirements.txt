@@ -13,7 +13,6 @@ nltk==3.4.5
 pyasn1==0.1.9
 pycrypto==2.6.1
 pygame==1.9.6
-pygobject==3.22.0
 PyJWT==1.7.1
 python-apt==1.4.1
 pytz==2019.3
