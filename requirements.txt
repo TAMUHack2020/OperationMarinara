@@ -1,4 +1,0 @@
-Flask==1.1.1
-MarkupSafe==1.1.1
-requests==2.22.0
-twilio==6.35.3
