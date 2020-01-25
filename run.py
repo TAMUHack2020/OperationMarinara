@@ -17,4 +17,4 @@ def sms_ahoy_reply():
     return str(resp)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3000)
+    app.run(debug=True)
