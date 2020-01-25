@@ -2,6 +2,10 @@
 
 from flask import Flask, request, redirect
 from twilio import twiml			# Twilio Markup Language
+import json
+
+with open("auth.json") as jsonFile:
+	auth = json.load(jsonFile)		# token: authorizaiton token, SID: account SID
 
 app = Flask(__name__)
 
