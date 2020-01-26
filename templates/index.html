@@ -1,25 +1,28 @@
 <html>
     <head>
         <title>TAMUHack ChatBot</title>
-        <link rel = "stylesheet" type="text/css" href="style.css"/>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+        <script src="//geodata.solutions/includes/countrystatecity.js"></script>
     </head>
     <header>
-        <h1>Check-In with American Airlines</h1>
+        <h1>Check-In with Operation Marinara</h1>
     </header>
     <body>
-        <form action="https://b8c853b6.ngrok.io/Check-In" method="POST">
-            Full Name:<br>
-            <input type="text" name="Name"><br>
-            Phone:<br>
-            <input type="text" name="Numba"><br>
-            Departure Time:<br>
-            <input type="time" name="Departure"><br>
-            Estimated Time Arrival:<br>
-            <input type="time" name="Arrival"><br>
-            Home Address:
-            <input type="text" name="Origin"><br>
-            Destination:<br>
-            <input type="text" name="Destination"><br>
+        <form action="http://localhost:5000/checkin" method="POST">
+            <select name="country" class="countries" id="countryId">
+                <option value="">Select Country</option>
+            </select>
+            <select name="state" class="states" id="stateId">
+                <option value="">Select State</option>
+            </select>
+            <select name="city" class="cities" id="cityId">
+                <option value="">Select City</option>
+            </select>
+            <br>
+            Name:<input type="text", name="Name"><br>
+            Phone:<input type="text" name="Numba"><br>
+            Departure:<input type="time" name="Departure"><br>
+            Arrival:<input type="time" name="Arrival"> <br>        
             <input type="submit">
         </form>
     </body>
