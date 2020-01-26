@@ -16,9 +16,9 @@ client = Client(account_sid, auth_token)
 
 message = client.messages \
     .create(
-         body='This is the ship that made the Kessel Run in fourteen parsecs?',
-         from_='+15017122661',
-         to='+15558675310'
+         body='Howdy, “Name”. Thank you for flying with American Airlines. Your flight number is “Flight Number”, leaves at time “time”, from “place A” to “place B” at time “ETA”.',
+         from_='+12512548067',
+         to='+12144496966'
      )
 
 print(message.sid)
