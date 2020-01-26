@@ -38,7 +38,7 @@ def check_in():
     newUser.departureTime = request.form['Departure']
     newUser.arrivalTime = request.form['Arrival']
     newUser.origin = request.form['Origin']
-    newUser.destination = request.form['Name']
+    newUser.destination = request.form['Destination']
 
     passanger.append(newUser)
     #app.logger.error('%s name', passanger[len(passanger)-1].name)
@@ -51,6 +51,7 @@ def check_in():
          to=newUser.phone
      )
 
+    return render_template('checkIn.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
