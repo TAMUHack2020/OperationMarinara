@@ -1,4 +1,5 @@
-from flask import Flask, request
+import user, logging
+from flask import Flask, request, render_template
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
 import json
@@ -7,21 +8,18 @@ app = Flask(__name__)
  # Download the helper library from https://www.twilio.com/docs/python/install
 from twilio.rest import Client
 
+passanger = []
 
 with open("config.json") as jsonFile:
     data = json.load(jsonFile)
 
 client = Client(data["SID"], data["token"])
 
-message = client.messages \
-    .create(
-         body='Howdy, “Name”. Thank you for flying with American Airlines. Your flight number is “Flight Number”, leaves at time “time”, from “place A” to “place B” at time “ETA”.',
-         from_=data["BotNumba"],
-         to=data["MyNumba"]
-     )
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-@app.route('/', methods=['POST'])
-
+@app.route('/sendsms', methods=['POST'])
 def bot():
     incoming_msg = request.values.get('Body', '').lower()
     resp = MessagingResponse()
@@ -31,3 +29,28 @@ def bot():
     else:
         msg.body('fuck')
     return str(resp)
+
+@app.route('/Check-In', methods=['GET','POST'])
+def check_in():
+    newUser = user.User()
+    newUser.name = request.form['Name']
+    newUser.phone = request.form['Numba']
+    newUser.departureTime = request.form['Departure']
+    newUser.arrivalTime = request.form['Arrival']
+    newUser.origin = request.form['Origin']
+    newUser.destination = request.form['Name']
+
+    passanger.append(newUser)
+    #app.logger.error('%s name', passanger[len(passanger)-1].name)
+
+    message = client.messages \
+    .create(
+         body='Howdy, {0}, Thank you for flying with American Airlines. Your flight number is {1}, leaves at time {2}, from {3} to {4} at time {5}.'.format(
+             newUser.name, 21, newUser.departureTime, newUser.origin, newUser.destination, newUser.arrivalTime),
+         from_=data["BotNumba"],
+         to=newUser.phone
+     )
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
