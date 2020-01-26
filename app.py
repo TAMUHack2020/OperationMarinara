@@ -4,7 +4,26 @@ from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
 
- 
+ # Download the helper library from https://www.twilio.com/docs/python/install
+from twilio.rest import Client
+import config
+
+# Your Account Sid and Auth Token from twilio.com/console
+# DANGER! This is insecure. See http://twil.io/secure
+account_sid = 'ACd1b6298567a153b756f6764bf9de27c2'
+auth_token = config.auth_key
+client = Client(account_sid, auth_token)
+
+message = client.messages \
+    .create(
+         body='This is the ship that made the Kessel Run in fourteen parsecs?',
+         from_='+15017122661',
+         to='+15558675310'
+     )
+
+print(message.sid)
+
+
 @app.route('/', methods=['POST'])
 
 def bot():
